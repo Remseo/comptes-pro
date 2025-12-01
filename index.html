@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <style>
+        :root{
+            --gutter: 1rem;
+            --space-0: 0;
+            --space-1: .25rem;
+            --space-2: .5rem;
+            --space-3: 1rem;
+            --space-4: 1.5rem;
+            --space-5: 2rem;
+            --space-6: 2.5rem;
+            --space-7: 3rem;
+        }
+
+        /* =========== GRID SYSTEM ================================== */
+        .row{
+            display:flex; flex-wrap:wrap;
+            margin-left:calc(var(--gutter) * -0.5);
+            margin-right:calc(var(--gutter) * -0.5);
+        }
+        .row>[class*="col-"]{
+            padding-left:calc(var(--gutter) * .5);
+            padding-right:calc(var(--gutter) * .5);
+            box-sizing:border-box;
+        }
+        .no-gutters{margin-left:0;margin-right:0}
+        .no-gutters>[class*="col-"]{padding-left:0;padding-right:0}
+
+        .row>.col-3{flex:0 0 25%; max-width:25%}
+        .row>.col-4{flex:0 0 33.333%; max-width:33.333%}
+        .row>.col-6{flex:0 0 50%; max-width:50%}
+        .row>.col-8{flex:0 0 66.666%; max-width:66.666%}
+        .row>.col-9{flex:0 0 75%; max-width:75%}
+        .row>.col-12{flex:0 0 100%; max-width:100%}
+
+        /* sm ≥490px */
+        @media (min-width:490px){
+            .row>.col-sm-3{flex:0 0 25%; max-width:25%}
+            .row>.col-sm-4{flex:0 0 33.333%; max-width:33.333%}
+            .row>.col-sm-6{flex:0 0 50%; max-width:50%}
+            .row>.col-sm-8{flex:0 0 66.666%; max-width:66.666%}
+            .row>.col-sm-9{flex:0 0 75%; max-width:75%}
+            .row>.col-sm-12{flex:0 0 100%; max-width:100%}
+        }
+
+        /* md ≥768px */
+        @media (min-width:768px){
+            .row>.col-md-3{flex:0 0 25%; max-width:25%}
+            .row>.col-md-6{flex:0 0 50%; max-width:50%}
+            .row>.col-md-9{flex:0 0 75%; max-width:75%}
+            .row>.col-md-12{flex:0 0 100%; max-width:100%}
+        }
+
+        /* lg ≥992px */
+        @media (min-width:992px){
+            .row>.col-lg-3{flex:0 0 25%; max-width:25%}
+            .row>.col-lg-4{flex:0 0 33.333%; max-width:33.333%}
+            .row>.col-lg-6{flex:0 0 50%; max-width:50%}
+            .row>.col-lg-8{flex:0 0 66.666%; max-width:66.666%}
+            .row>.col-lg-9{flex:0 0 75%; max-width:75%}
+            .row>.col-lg-12{flex:0 0 100%; max-width:100%}
+        }
+
+        /* xl ≥1200px */
+        @media (min-width:1200px){
+            .row>.col-xl-3{flex:0 0 25%; max-width:25%}
+            .row>.col-xl-4{flex:0 0 33.333%; max-width:33.333%}
+            .row>.col-xl-6{flex:0 0 50%; max-width:50%}
+            .row>.col-xl-8{flex:0 0 66.666%; max-width:66.666%}
+            .row>.col-xl-9{flex:0 0 75%; max-width:75%}
+            .row>.col-xl-12{flex:0 0 100%; max-width:100%}
+        }
+
+        /* Colonnes auto (shrink-to-content) */
+        .col-auto{flex:0 0 auto; width:auto; max-width:none}
+
+        /* sm ≥ 576px */
+        @media (min-width:576px){
+            .col-sm-auto{flex:0 0 auto; width:auto; max-width:none}
+        }
+
+        /* md ≥ 768px */
+        @media (min-width:768px){
+            .col-md-auto{flex:0 0 auto; width:auto; max-width:none}
+        }
+
+        /* lg ≥ 992px */
+        @media (min-width:992px){
+            .col-lg-auto{flex:0 0 auto; width:auto; max-width:none}
+        }
+
+        /* xl ≥ 1200px */
+        @media (min-width:1200px){
+            .col-xl-auto{flex:0 0 auto; width:auto; max-width:none}
+        }
+
+        /* =========== ORDER UTILS ================================== */
+        @media (min-width:768px){
+            .order-md-0{order:0}
+            .order-md-1{order:1}
+            .order-md-2{order:2}
+            .order-md-3{order:3}
+            .order-md-last{order:999}
+        }
+        @media (min-width:992px){
+            .order-lg-0{order:0}
+            .order-lg-1{order:1}
+            .order-lg-2{order:2}
+            .order-lg-3{order:3}
+            .order-lg-last{order:999}
+        }
+        @media (min-width:1200px){
+            .order-xl-0{order:0}
+            .order-xl-1{order:1}
+            .order-xl-2{order:2}
+            .order-xl-3{order:3}
+            .order-xl-last{order:999}
+        }
+
+        /* =========== DISPLAY UTILS ================================ */
+        @media (min-width:768px){ .d-md-none{display:none!important} }
+        @media (min-width:992px){ .d-lg-none{display:none!important} }
+        @media (min-width:1200px){ .d-xl-none{display:none!important} }
+
+        /* =========== SPACING UTILS ================================ */
+        .mt-0{margin-top:var(--space-0) !important;} .mb-0{margin-bottom:var(--space-0) !important;}
+        .mt-1{margin-top:var(--space-1) !important;} .mb-1{margin-bottom:var(--space-1) !important;}
+        .mt-2{margin-top:var(--space-2) !important;} .mb-2{margin-bottom:var(--space-2) !important;}
+        .mt-3{margin-top:var(--space-3) !important;} .mb-3{margin-bottom:var(--space-3) !important;}
+        .mt-4{margin-top:var(--space-4) !important;} .mb-4{margin-bottom:var(--space-4) !important;}
+        .mt-5{margin-top:var(--space-5) !important;} .mb-5{margin-bottom:var(--space-5) !important;}
+        .mt-6{margin-top:var(--space-6) !important;} .mb-6{margin-bottom:var(--space-6) !important;}
+        .mt-7{margin-top:var(--space-7) !important;} .mb-7{margin-bottom:var(--space-7) !important;}
+
+        .pt-2{padding-top:var(--space-2) !important;} .pb-2{padding-bottom:var(--space-2) !important;}
+        .pt-3{padding-top:var(--space-3) !important;} .pb-3{padding-bottom:var(--space-3) !important;}
+        .pl-2{padding-left:var(--space-2) !important;} .pl-3{padding-left:var(--space-3) !important;}
+        .pr-3{padding-right:var(--space-3) !important;}
+
+        @media (min-width:4900px){ .pl-sm-0{padding-left:0!important} }
+
+        /* =========== TYPO & COLORS ================================= */
+        .review-card {
+            font-family:Roboto, sans-serif;
+            font-size: 12px;
+        }
+
+        .review-card h3 {
+            font-family: Frank Ruhl Libre, Times, serif;
+            font-weight: 800;
+        }
+
+        .bold{font-weight:600}
+        .text-center{text-align:center}
+        @media (min-width:768px){ .text-md-left{text-align:left} }
+        .text-gray-600{color:#4b5563}
+        .text-gray-800{color:#374151}
+        .text-primary-light{color:#1f6ae0}
+
+        /* =========== DIVERS ======================================= */
+        .bg-cover{background-size:cover; background-position:center}
+        .rounded-top-left{border-top-left-radius:12px}
+        .gray-background{background:#f5f6f7; color:#6b7280}
+        hr{border:0; border-top:1px solid #e5e7eb; margin:var(--space-2) 0}
+
+        /* Lien étendu */
+        .stretched-link{position:relative; z-index:1}
+        .stretched-link::after{content:""; position:absolute; inset:0; z-index:-1}
+
+        /* =========== COMPOSANTS =================================== */
+        .card{background:#fff; border:1px solid #e5e7eb; border-radius:16px}
+        .card-md{padding:0}
+        .lift{transition:transform .2s ease, box-shadow .2s ease}
+        .lift:hover{transform:translateY(-2px)}
+        .lift-lg{box-shadow:0 12px 40px rgba(0,0,0,.08)}
+
+        /* Boutons */
+        .btn{display:inline-block; cursor:pointer; user-select:none; text-decoration:none; text-align:center;
+            border:1px solid transparent; padding:1rem 1rem; border-radius:.5rem; font-size:16px; font-weight:700 ; margin:0 5px 12px 5px;}
+        .btn-block{display:block;}
+        .btn-primary{background:#1f6ae0; color:#fff; border-color:#1f6ae0; border-radius:14px; padding:.9rem 1.5rem;}
+        .btn-primary:hover{filter:brightness(1.05)}
+
+        /* =========== REVIEW-CARD SPÉCIFIQUE ======================= */
+        .review-card{position:relative; overflow:hidden; border-radius:16px; background:#fff;
+            box-shadow:0 3px 3px rgba(0,0,0,.08)}
+        .review-card img{max-width:70px; height:auto; margin:6px auto}
+        .review-card h3{font-size:20px; line-height:1.1; font-weight:800; color:#0f172a; margin:6px 0 0}
+        .review-card p.small.bold{font-size: 13px; font-weight:700; color:#4b5563; margin:6px 0 10px; text-align:left}
+        .review-card ul{list-style:none; margin:0; padding:0}
+        .review-card li{margin:8px 0; color:#4b5563; font-size:12px;}
+        .review-card li i.fe{margin-right:.4rem}
+        .review-card .fe-chevron-right{color:#6b7280}
+
+        /* Avis */
+        .review-card a.review-link{display:inline-block; color:#8b949e; text-decoration:none; margin-top:5px;}
+        .review-card a.review-link:hover{text-decoration:underline}
+
+        /* Soulignement crème */
+        .text-underline-warning{
+            background-image:linear-gradient(#f2dfb6,#f2dfb6);
+            background-size:100% .45em; background-position:0 88%; background-repeat:no-repeat;
+            font-size: 14px;
+        }
+
+        /* Étoiles */
+        .stars{
+            --star-size:25px; --star-color:#1f6ae0; --star-background:#1f6ae0;
+            display:inline-block; font-size:var(--star-size); font-family:Times, serif; line-height:1;
+        }
+        .stars::before{
+            content:"★★★★★"; letter-spacing:3px;
+            background:linear-gradient(90deg, var(--star-background) calc(var(--rating)/5*100%), var(--star-color) calc(var(--rating)/5*100%));
+            -webkit-background-clip:text; background-clip:text; color:transparent;
+        }
+
+        /* Check */
+        .fe-check {
+            display:inline-block;
+            width:1em; height:1em;
+            vertical-align:middle;
+            background: no-repeat center/contain url("data:image/svg+xml;utf8, <svg xmlns='http://www.w3.org/2000/svg' fill='%231f6ae0' viewBox='0 0 16 16'> <path d='M13.485 1.929l-7.07 7.07-3.536-3.536-1.415 1.414 4.95 4.95 8.485-8.485z'/> </svg>");
+        }
+
+        .big-number{
+            margin-top:15px;
+            margin-bottom:15px;
+            font-size:30px;
+            font-family: Frank Ruhl Libre, Times, serif;
+            font-weight: bold;
+            display:inline-block;
+        }
+        .big-pct{
+            font-size:20px;
+            font-family: Frank Ruhl Libre, Times, serif;
+        }
+        .promo{
+            font-size:16px;
+        }
+    </style>
+</head>
+<body>
+<div class="post-content ml-15 mr-15">
+
+<!-- SHINE -->
+<div class="review-card card card-md lift lift-lg mt-4 mb-4">
+    <div class="row no-gutters">
+        <div class="col-12 bg-cover text-center gray-background pt-2 pb-2 ">
+            <div class="stars" style="--rating: 5;" aria-label="Note : 5"></div>
+            <br>
+        </div>
+        <div class="col-12 pt-3 pb-3">
+            <div class="row">
+                <!-- Logo -->
+                <div class="col-12 col-sm-3 bg-cover rounded-top-left text-center">
+                    <div class="row no-gutters">
+                        <div class="col-12 text-center">
+                            <h3 class="mt-0 mb-1">Shine</h3>
+                        </div>
+                        <div class="col-12 text-center">
+                            <img decoding="async" style="width:auto; max-width: 80px; height: auto;" src="https://www.banque-micro-macro.fr/iframe/images/shine.png"
+                                 alt="Shine">
+                        </div>
+                    </div>
+                    <a class="stretched-link" href="#"></a>
+                </div>
+                <!-- Description -->
+                <div class="col-12 col-sm-9">
+                    <p class="mt-1 mb-3 small bold text-gray- pl-2 pl-sm-0">
+                        Le compte pro en ligne le moins cher !
+                    </p>
+                    <div class="row pl-2 pl-sm-0">
+                        <div class="col-6 small mb-1 text-gray-600">
+                            <ul class="pl-5  mb-0">
+                                <li><i class='fe fe-check'></i> Sans condition de revenus</li>
+                                <li><i class='fe fe-check'></i> Gratuite</li>
+                                <li><i class='fe fe-check'></i> Outils de facturation illimité</li>
+                            </ul>
+                        </div>
+                        <div class="col-6 small mb-1 text-gray-600">
+                            <ul class="pl-5 mb-0">
+                                <li><i class='fe fe-check'></i> Sans frais cachés</li>
+                                <li><i class='fe fe-check'></i> Élu Service Client de l'Année 2025</li>
+                                <li><i class='fe fe-check'></i> Adaptative</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <a class="stretched-link" href="#"></a>
+                <div class="col-12 pl-3 pr-3">
+                    <div class="col-md-auto text-center mt-3 ">
+                        <p class="mt-2">
+                            <strong class="promo text-underline-warning text-gray-800">dès 0 €</strong>
+                        </p>
+                        <a class="btn btn-primary btn-block" target="_blank" rel="nofollow" href="#">
+                            Profiter de l'offre !
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 bg-cover text-center gray-background pt-2 pb-2 pl-2 ">
+        </div>
+    </div>
+</div>
+
+<!-- QONTO -->
+<div class="review-card card card-md lift lift-lg mt-4 mb-4">
+    <div class="row no-gutters">
+        <div class="col-12 bg-cover text-center gray-background pt-2 pb-2 ">
+            <div class="stars" style="--rating: 4.8;" aria-label="Note : 4.8"></div>
+            <br>
+        </div>
+        <div class="col-12 pt-3 pb-3">
+            <div class="row">
+                <!-- Logo -->
+                <div class="col-12 col-sm-3 bg-cover rounded-top-left text-center">
+                    <div class="row no-gutters">
+                        <div class="col-12 text-center">
+                            <h3 class="mt-0 mb-1">Qonto</h3>
+                        </div>
+                        <div class="col-12 text-center">
+                            <img decoding="async" style="width:auto; max-width: 80px; height: auto;" src="https://www.banque-micro-macro.fr/iframe/images/qonto.png"
+                                 alt="Qonto">
+                        </div>
+                    </div>
+                    <a class="stretched-link" href="#"></a>
+                </div>
+                <!-- Description -->
+                <div class="col-12 col-sm-9">
+                    <p class="mt-1 mb-3 small bold text-gray- pl-2 pl-sm-0">
+                        La néobanque pro leader en Europe
+                    </p>
+                    <div class="row pl-2 pl-sm-0">
+                        <div class="col-6 small mb-1 text-gray-600">
+                            <ul class="pl-5  mb-0">
+                                <li><i class='fe fe-check'></i> Dès 9€ / mois</li>
+                                <li><i class='fe fe-check'></i> Comptabilité intégrée</li>
+                                <li><i class='fe fe-check'></i> Cartes physiques et virtuelles</li>
+                            </ul>
+                        </div>
+                        <div class="col-6 small mb-1 text-gray-600">
+                            <ul class="pl-5 mb-0">
+                                <li><i class='fe fe-check'></i> API développeur</li>
+                                <li><i class='fe fe-check'></i> Support 7j/7</li>
+                                <li><i class='fe fe-check'></i> Découvert autorisé</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <a class="stretched-link" href="#"></a>
+                <div class="col-12 pl-3 pr-3">
+                    <div class="col-md-auto text-center mt-3 ">
+                        <p class="mt-2">
+                            <strong class="promo text-underline-warning text-gray-800">1 mois offert</strong>
+                        </p>
+                        <a class="btn btn-primary btn-block" target="_blank" rel="nofollow" href="#">
+                            Profiter de l'offre !
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 bg-cover text-center gray-background pt-2 pb-2 pl-2 ">
+        </div>
+    </div>
+</div>
+
+<!-- CA PROPULSE -->
+<div class="review-card card card-md lift lift-lg mt-4 mb-4">
+    <div class="row no-gutters">
+        <div class="col-12 bg-cover text-center gray-background pt-2 pb-2 ">
+            <div class="stars" style="--rating: 4.5;" aria-label="Note : 4.5"></div>
+            <br>
+        </div>
+        <div class="col-12 pt-3 pb-3">
+            <div class="row">
+                <!-- Logo -->
+                <div class="col-12 col-sm-3 bg-cover rounded-top-left text-center">
+                    <div class="row no-gutters">
+                        <div class="col-12 text-center">
+                            <h3 class="mt-0 mb-1">CA Propulse</h3>
+                        </div>
+                        <div class="col-12 text-center">
+                            <img decoding="async" style="width:auto; max-width: 80px; height: auto;" src="https://www.banque-micro-macro.fr/iframe/images/ca-propulse.png"
+                                 alt="CA Propulse">
+                        </div>
+                    </div>
+                    <a class="stretched-link" href="#"></a>
+                </div>
+                <!-- Description -->
+                <div class="col-12 col-sm-9">
+                    <p class="mt-1 mb-3 small bold text-gray- pl-2 pl-sm-0">
+                        Le compte pro du Crédit Agricole
+                    </p>
+                    <div class="row pl-2 pl-sm-0">
+                        <div class="col-6 small mb-1 text-gray-600">
+                            <ul class="pl-5  mb-0">
+                                <li><i class='fe fe-check'></i> Dès 14€ / mois</li>
+                                <li><i class='fe fe-check'></i> Réseau d'agences</li>
+                                <li><i class='fe fe-check'></i> Services bancaires complets</li>
+                            </ul>
+                        </div>
+                        <div class="col-6 small mb-1 text-gray-600">
+                            <ul class="pl-5 mb-0">
+                                <li><i class='fe fe-check'></i> Dépôt d'espèces</li>
+                                <li><i class='fe fe-check'></i> Découvert possible</li>
+                                <li><i class='fe fe-check'></i> Conseiller dédié</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <a class="stretched-link" href="#"></a>
+                <div class="col-12 pl-3 pr-3">
+                    <div class="col-md-auto text-center mt-3 ">
+                        <p class="mt-2">
+                            <strong class="promo text-underline-warning text-gray-800">6 mois gratuits</strong>
+                        </p>
+                        <a class="btn btn-primary btn-block" target="_blank" rel="nofollow" href="#">
+                            Profiter de l'offre !
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 bg-cover text-center gray-background pt-2 pb-2 pl-2 ">
+        </div>
+    </div>
+</div>
+
+<!-- N26 BUSINESS -->
+<div class="review-card card card-md lift lift-lg mt-4 mb-4">
+    <div class="row no-gutters">
+        <div class="col-12 bg-cover text-center gray-background pt-2 pb-2 ">
+            <div class="stars" style="--rating: 4.3;" aria-label="Note : 4.3"></div>
+            <br>
+        </div>
+        <div class="col-12 pt-3 pb-3">
+            <div class="row">
+                <!-- Logo -->
+                <div class="col-12 col-sm-3 bg-cover rounded-top-left text-center">
+                    <div class="row no-gutters">
+                        <div class="col-12 text-center">
+                            <h3 class="mt-0 mb-1">N26 Business</h3>
+                        </div>
+                        <div class="col-12 text-center">
+                            <img decoding="async" style="width:auto; max-width: 80px; height: auto;" src="https://www.banque-micro-macro.fr/iframe/images/n26.png"
+                                 alt="N26 Business">
+                        </div>
+                    </div>
+                    <a class="stretched-link" href="#"></a>
+                </div>
+                <!-- Description -->
+                <div class="col-12 col-sm-9">
+                    <p class="mt-1 mb-3 small bold text-gray- pl-2 pl-sm-0">
+                        La banque mobile 100% allemande
+                    </p>
+                    <div class="row pl-2 pl-sm-0">
+                        <div class="col-6 small mb-1 text-gray-600">
+                            <ul class="pl-5  mb-0">
+                                <li><i class='fe fe-check'></i> Dès 9€ / mois</li>
+                                <li><i class='fe fe-check'></i> Interface intuitive</li>
+                                <li><i class='fe fe-check'></i> Paiements instantanés</li>
+                            </ul>
+                        </div>
+                        <div class="col-6 small mb-1 text-gray-600">
+                            <ul class="pl-5 mb-0">
+                                <li><i class='fe fe-check'></i> Notifications en temps réel</li>
+                                <li><i class='fe fe-check'></i> Sans frais cachés</li>
+                                <li><i class='fe fe-check'></i> Catégorisation auto</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <a class="stretched-link" href="#"></a>
+                <div class="col-12 pl-3 pr-3">
+                    <div class="col-md-auto text-center mt-3 ">
+                        <p class="mt-2">
+                            <strong class="promo text-underline-warning text-gray-800">3 mois gratuits</strong>
+                        </p>
+                        <a class="btn btn-primary btn-block" target="_blank" rel="nofollow" href="#">
+                            Profiter de l'offre !
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 bg-cover text-center gray-background pt-2 pb-2 pl-2 ">
+        </div>
+    </div>
+</div>
+
+<!-- REVOLUT BUSINESS -->
+<div class="review-card card card-md lift lift-lg mt-4 mb-4">
+    <div class="row no-gutters">
+        <div class="col-12 bg-cover text-center gray-background pt-2 pb-2 ">
+            <div class="stars" style="--rating: 4.2;" aria-label="Note : 4.2"></div>
+            <br>
+        </div>
+        <div class="col-12 pt-3 pb-3">
+            <div class="row">
+                <!-- Logo -->
+                <div class="col-12 col-sm-3 bg-cover rounded-top-left text-center">
+                    <div class="row no-gutters">
+                        <div class="col-12 text-center">
+                            <h3 class="mt-0 mb-1">Revolut Business</h3>
+                        </div>
+                        <div class="col-12 text-center">
+                            <img decoding="async" style="width:auto; max-width: 80px; height: auto;" src="https://www.banque-micro-macro.fr/iframe/images/revolut.png"
+                                 alt="Revolut Business">
+                        </div>
+                    </div>
+                    <a class="stretched-link" href="#"></a>
+                </div>
+                <!-- Description -->
+                <div class="col-12 col-sm-9">
+                    <p class="mt-1 mb-3 small bold text-gray- pl-2 pl-sm-0">
+                        La fintech internationale pour pros
+                    </p>
+                    <div class="row pl-2 pl-sm-0">
+                        <div class="col-6 small mb-1 text-gray-600">
+                            <ul class="pl-5  mb-0">
+                                <li><i class='fe fe-check'></i> Dès 0€ / mois</li>
+                                <li><i class='fe fe-check'></i> Multi-devises</li>
+                                <li><i class='fe fe-check'></i> Change avantageux</li>
+                            </ul>
+                        </div>
+                        <div class="col-6 small mb-1 text-gray-600">
+                            <ul class="pl-5 mb-0">
+                                <li><i class='fe fe-check'></i> Cartes virtuelles illimitées</li>
+                                <li><i class='fe fe-check'></i> Crypto trading</li>
+                                <li><i class='fe fe-check'></i> Analytics avancés</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <a class="stretched-link" href="#"></a>
+                <div class="col-12 pl-3 pr-3">
+                    <div class="col-md-auto text-center mt-3 ">
+                        <p class="mt-2">
+                            <strong class="promo text-underline-warning text-gray-800">3 mois Premium offerts</strong>
+                        </p>
+                        <a class="btn btn-primary btn-block" target="_blank" rel="nofollow" href="#">
+                            Profiter de l'offre !
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 bg-cover text-center gray-background pt-2 pb-2 pl-2 ">
+        </div>
+    </div>
+</div>
+
+</div>
+</body>
+</html>
