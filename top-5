@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #fff; }
+  .carousel-wrapper { background: #fff; padding: 16px 48px; position: relative; max-width: 960px; margin: 0 auto; }
+  .carousel-track-container { overflow: hidden; width: 100%; }
+  .carousel-track { display: flex; transition: transform 0.4s ease; gap: 16px; }
+  .carousel-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); padding: 20px 18px 18px; flex: 0 0 calc(33.333% - 11px); min-width: calc(33.333% - 11px); display: flex; flex-direction: column; gap: 10px; }
+  .card-header { display: flex; align-items: center; gap: 12px; min-height: 70px; }
+  .medal { font-size: 38px; line-height: 1; flex-shrink: 0; width: 44px; text-align: center; }
+  .medal-placeholder { width: 44px; flex-shrink: 0; }
+  .card-logo { width: 60px; height: 60px; object-fit: contain; border-radius: 10px; }
+  .card-name { font-size: 17px; font-weight: 800; color: #1a1a1a; line-height: 1.2; }
+  .card-desc { font-size: 13.5px; color: #333; line-height: 1.55; flex: 1; }
+  .card-desc strong { font-weight: 700; color: #1a1a1a; }
+  .card-btn { display: block; background: #3d3df5; color: #fff; text-align: center; text-decoration: none; font-weight: 700; font-size: 15px; padding: 13px 10px; border-radius: 8px; transition: filter 0.2s; margin-top: auto; }
+  .card-btn:hover { filter: brightness(1.1); }
+  .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: #3d3df5; color: #fff; border: none; border-radius: 50%; width: 36px; height: 36px; font-size: 22px; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.15); transition: filter 0.2s; }
+  .carousel-btn:hover { filter: brightness(1.15); }
+  .carousel-btn.prev { left: 6px; }
+  .carousel-btn.next { right: 6px; }
+  .carousel-btn:disabled { opacity: 0.25; cursor: default; }
+  .carousel-dots { display: flex; justify-content: center; gap: 8px; margin-top: 14px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: #d1d5db; cursor: pointer; transition: background 0.2s, transform 0.2s; }
+  .dot.active { background: #3d3df5; transform: scale(1.3); }
+  @media (max-width: 640px) {
+    .carousel-wrapper { padding: 16px 40px; }
+    .carousel-card { flex: 0 0 100%; min-width: 100%; }
+  }
+</style>
+</head>
+<body>
+<div class="carousel-wrapper">
+  <button class="carousel-btn prev" id="prevBtn" onclick="move(-1)">&#8249;</button>
+  <button class="carousel-btn next" id="nextBtn" onclick="move(1)">&#8250;</button>
+  <div class="carousel-track-container">
+    <div class="carousel-track" id="track">
+
+      <!-- 1. SHINE -->
+      <div class="carousel-card">
+        <div class="card-header">
+          <span class="medal">🥇</span>
+          <img class="card-logo" src="https://remseo.github.io/comptes-pro/Shine.png" alt="Shine">
+        </div>
+        <div class="card-name">Shine</div>
+        <div class="card-desc"><strong>Notre note 9,3/10</strong> : Le meilleur compte pro gratuit et évolutif. Avec outils de facturation intégré.</div>
+        <a class="card-btn" href="https://www.shine.fr/?utm_source=affiliation&utm_medium=affilae&utm_campaign=blog-copilote&le-point=1&ae=279" target="_blank" rel="nofollow">Ouvrir un compte</a>
+      </div>
+
+      <!-- 2. QONTO -->
+      <div class="carousel-card">
+        <div class="card-header">
+          <span class="medal">🥈</span>
+          <img class="card-logo" src="https://remseo.github.io/comptes-pro/Qonto.png" alt="Qonto">
+        </div>
+        <div class="card-name">Qonto</div>
+        <div class="card-desc"><strong>Notre note 9,1/10</strong> : Le compte pro préféré des PME et startups. Carte Mastercard, comptabilité intégrée et service client 7j/7.</div>
+        <a class="card-btn" href="https://qonto.com/fr/" target="_blank" rel="nofollow">Ouvrir un compte</a>
+      </div>
+
+      <!-- 3. PROPULSE BY CA -->
+      <div class="carousel-card">
+        <div class="card-header">
+          <span class="medal">🥉</span>
+          <img class="card-logo" src="https://remseo.github.io/comptes-pro/Propulse.png" alt="Propulse by CA">
+        </div>
+        <div class="card-name">Propulse by CA</div>
+        <div class="card-desc"><strong>Notre note 8,8/10</strong> : Le compte pro des indépendants avec accompagnement à la création d'entreprise et assurances complètes dès 8 €/mois.</div>
+        <a class="card-btn" href="https://propulsebyca.fr/" target="_blank" rel="nofollow">Ouvrir un compte</a>
+      </div>
+
+      <!-- 4. REVOLUT BUSINESS -->
+      <div class="carousel-card">
+        <div class="card-header">
+          <span class="medal-placeholder"></span>
+          <img class="card-logo" src="https://remseo.github.io/comptes-pro/Revolut.png" alt="Revolut Business">
+        </div>
+        <div class="card-name">Revolut Business</div>
+        <div class="card-desc"><strong>Notre note 8,5/10</strong> : Idéal pour les entreprises internationales. Paiements multi-devises, cashback et frais réduits à l'étranger.</div>
+        <a class="card-btn" href="https://www.revolut.com/business/" target="_blank" rel="nofollow">Ouvrir un compte</a>
+      </div>
+
+      <!-- 5. HELLO BANK PRO -->
+      <div class="carousel-card">
+        <div class="card-header">
+          <span class="medal-placeholder"></span>
+          <img class="card-logo" src="https://remseo.github.io/comptes-pro/Hello.png" alt="HelloBank Pro">
+        </div>
+        <div class="card-name">HelloBank Pro</div>
+        <div class="card-desc"><strong>Notre note 8,2/10</strong> : Filiale BNP Paribas, compte sans frais de tenue, carte Visa et accès aux agences BNP pour les indépendants.</div>
+        <a class="card-btn" href="https://www.hellobank.fr/" target="_blank" rel="nofollow">Ouvrir un compte</a>
+      </div>
+
+    </div>
+  </div>
+  <div class="carousel-dots" id="dots"></div>
+</div>
+<script>
+  const track = document.getElementById("track");
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+  const dotsContainer = document.getElementById("dots");
+  const cards = track.querySelectorAll(".carousel-card");
+  const total = cards.length;
+  let current = 0;
+  function getVisible() { return window.innerWidth <= 640 ? 1 : 3; }
+  function maxIndex() { return total - getVisible(); }
+  function buildDots() {
+    dotsContainer.innerHTML = "";
+    for (let i = 0; i <= maxIndex(); i++) {
+      const d = document.createElement("span");
+      d.className = "dot" + (i === current ? " active" : "");
+      d.onclick = () => goTo(i);
+      dotsContainer.appendChild(d);
+    }
+  }
+  function updateDots() {
+    dotsContainer.querySelectorAll(".dot").forEach((d, i) => d.classList.toggle("active", i === current));
+  }
+  function goTo(index) {
+    current = Math.max(0, Math.min(index, maxIndex()));
+    const cardWidth = cards[0].offsetWidth + 16;
+    track.style.transform = "translateX(-" + (current * cardWidth) + "px)";
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current >= maxIndex();
+    updateDots();
+  }
+  function move(dir) { goTo(current + dir); }
+  window.addEventListener("resize", () => { buildDots(); goTo(Math.min(current, maxIndex())); });
+  buildDots();
+  goTo(0);
+</script>
+</body>
+</html>
